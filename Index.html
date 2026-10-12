@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Undangan Pernikahan Mon &amp; Din</title>
+<meta name="description" content="Kami mengundang Anda untuk hadir di pernikahan Mon &amp; Din pada 27 Oktober 2027.">
+<meta property="og:title" content="Undangan Pernikahan Mon &amp; Din">
+<meta property="og:description" content="Rabu, 27 Oktober 2027">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#E6EBE3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F2F4EF;      /* putih kehijauan, latar utama */
+    --mist:#E6EBE3;       /* hijau kabut, latar sampul/hero/footer */
+    --ink:#26332D;        /* hijau tua keabuan, teks */
+    --ink-soft:#55645B;   /* teks sekunder */
+    --sage:#8FA08A;       /* hijau sage, garis hias */
+    --sage-deep:#4F6657;  /* hijau sage tua, tombol */
+    --sand:#C9B89B;       /* pasir, garis hias tipis */
+    --line:rgba(38,51,45,.16);
+    --serif:"Instrument Serif","Iowan Old Style",Georgia,"Times New Roman",serif;
+    --sans:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.65;font-size:1rem;-webkit-font-smoothing:antialiased}
+  body.locked{overflow:hidden}
+  img{max-width:100%;display:block}
+  h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance}
+  :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* ---------- Tombol ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1.4rem;border:1px solid var(--sage-deep);border-radius:999px;background:transparent;color:var(--sage-deep);font:500 .95rem/1.2 var(--sans);text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
+  .btn:hover{background:rgba(79,102,87,.1)}
+  .btn.utama{background:var(--sage-deep);color:var(--paper)}
+  .btn.utama:hover{background:#3F5448}
+  .btn[disabled]{opacity:.6;cursor:progress}
+
+  /* ---------- Sampul ---------- */
+  .cover{position:fixed;inset:0;z-index:50;background:var(--mist);overflow:auto;display:grid;place-items:center;padding:24px;text-align:center}
+  .cover.open{transform:translateY(-100%);visibility:hidden;transition:transform .9s cubic-bezier(.7,0,.2,1),visibility 0s linear .9s}
+  .cover-inner{display:flex;flex-direction:column;align-items:center;gap:28px;padding:8px 0}
+  .arch-frame{overflow:hidden;padding:24px 24px 0}
+  .arch{width:min(62vw,250px);aspect-ratio:3/4;border:1px solid var(--sage);border-bottom:0;border-radius:999px 999px 0 0;
+        box-shadow:0 0 0 10px var(--mist),0 0 0 11px var(--sand),0 0 0 21px var(--mist),0 0 0 22px var(--line);
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding-top:12%}
+  .arch-kecil{font-size:.85rem;color:var(--ink-soft);margin-bottom:10px}
+  .arch-nama{font:400 clamp(2.8rem,13vw,3.6rem)/1 var(--serif)}
+  .arch-dan{font:italic 400 1.6rem/1 var(--serif);color:var(--sage-deep)}
+  .arch-tgl{font-size:.9rem;color:var(--ink-soft);margin-top:14px}
+  .penerima{max-width:320px}
+  .penerima .sapa{font-size:.95rem;color:var(--ink-soft)}
+  .penerima .tamu{font:400 1.9rem/1.2 var(--serif);margin:4px 0 0;overflow-wrap:anywhere}
+
+  /* ---------- Bagian umum ---------- */
+  .section{padding:88px 24px;text-align:center}
+  .section+.section{border-top:1px solid var(--line)}
+  .wrap{max-width:720px;margin:0 auto}
+  .section h2{font-size:clamp(2rem,6vw,2.6rem);line-height:1.1;margin-bottom:12px}
+  .pengantar{max-width:48ch;margin:0 auto;color:var(--ink-soft)}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--mist);padding:104px 24px 80px;text-align:center;border-top:0!important}
+  .hero .salam{font-size:.95rem;color:var(--ink-soft);margin-bottom:20px}
+  .hero h1{font-size:clamp(3.6rem,16vw,7rem);line-height:.95;letter-spacing:-.01em}
+  .hero h1 em{font-style:italic;color:var(--sage-deep);padding:0 .1em}
+  .hero .tanggal{margin-top:24px;font:400 1.5rem/1.3 var(--serif)}
+  .hitung{display:flex;justify-content:center;margin-top:44px}
+  .hitung div{padding:0 clamp(14px,4.5vw,32px);border-left:1px solid var(--line)}
+  .hitung div:first-child{border-left:0}
+  .hitung b{display:block;font:400 clamp(2rem,9vw,3.2rem)/1 var(--serif);font-variant-numeric:tabular-nums}
+  .hitung span{font-size:.85rem;color:var(--ink-soft)}
+  .hitung-selesai{font:italic 400 1.5rem/1.3 var(--serif);color:var(--sage-deep)}
+  .hero-foto{width:min(70vw,300px);aspect-ratio:3/4;margin:0 auto 40px;border-radius:999px 999px 0 0;overflow:hidden;background:var(--paper)}
+  .hero-foto img,.orang .foto img{width:100%;height:100%;object-fit:cover}
+
+  /* ---------- Salam ---------- */
+  .salam-isi{font:400 clamp(1.4rem,4.5vw,1.8rem)/1.45 var(--serif);max-width:30em;margin:0 auto;text-wrap:balance}
+
+  /* ---------- Mempelai ---------- */
+  .pasangan{display:grid;gap:56px;margin-top:48px}
+  .orang .foto{width:min(62%,200px);aspect-ratio:3/4;margin:0 auto 22px;border-radius:999px 999px 0 0;overflow:hidden;background:var(--mist)}
+  .orang h3{font-size:2.6rem;line-height:1}
+  .orang .lengkap{margin-top:8px;font-weight:600}
+  .orang .ortu{margin-top:6px;color:var(--ink-soft);font-size:.95rem}
+  .orang .ig{display:inline-block;margin-top:8px;color:var(--sage-deep);font-size:.95rem}
+  @media(min-width:640px){.pasangan{grid-template-columns:1fr 1fr;gap:40px}}
+
+  /* ---------- Acara ---------- */
+  .acara-grid{display:grid;gap:56px;margin-top:48px}
+  .acara h3{font-size:2rem;line-height:1.1}
+  .acara .waktu{margin-top:14px;font-weight:600}
+  .acara .tempat{margin-top:14px}
+  .acara .alamat{color:var(--ink-soft);font-size:.95rem;max-width:30ch;margin:2px auto 0}
+  .acara .aksi{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+  @media(min-width:640px){
+    .acara-grid{grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:0}
+    .acara{padding:0 32px}
+    .acara+.acara{border-left:1px solid var(--line)}
+  }
+
+  /* ---------- Galeri ---------- */
+  .galeri-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:40px}
+  .galeri-grid button{padding:0;border:0;background:var(--mist);cursor:zoom-in;aspect-ratio:1;overflow:hidden;border-radius:6px}
+  .galeri-grid img{width:100%;height:100%;object-fit:cover}
+  @media(min-width:640px){.galeri-grid{grid-template-columns:repeat(3,1fr)}}
+  dialog#lightbox{border:0;background:transparent;max-width:min(94vw,900px);max-height:92vh;padding:0;overflow:visible}
+  dialog#lightbox::backdrop{background:rgba(38,51,45,.88)}
+  dialog#lightbox img{max-height:86vh;margin:0 auto;border-radius:6px}
+  dialog#lightbox .tutup{position:absolute;top:-44px;right:0;background:none;border:0;color:#fff;font-size:2rem;line-height:1;cursor:pointer;padding:4px 10px}
+
+  /* ---------- RSVP dan ucapan ---------- */
+  .form{max-width:520px;margin:40px auto 0;text-align:left;display:grid;gap:20px}
+  .form label,.form legend{display:block;font-weight:500;font-size:.95rem;margin-bottom:6px}
+  .form input[type=text],.form select,.form textarea{width:100%;padding:.8rem 1rem;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit}
+  .form textarea{min-height:110px;resize:vertical}
+  .form .hitungan{font-size:.82rem;color:var(--ink-soft);text-align:right;margin-top:4px}
+  .pilihan{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:0}
+  .pilihan label{position:relative;margin:0}
+  .pilihan input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0}
+  .pilihan span{display:inline-block;padding:.55rem 1.1rem;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:400}
+  .pilihan input:checked+span{background:var(--sage-deep);border-color:var(--sage-deep);color:var(--paper)}
+  .pilihan input:focus-visible+span{outline:2px solid var(--ink);outline-offset:3px}
+  .jebakan{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .status{min-height:1.5em;font-size:.95rem}
+  .status.galat{color:#8A3B32}
+  .status.ok{color:var(--sage-deep)}
+  .pratinjau{max-width:520px;margin:28px auto 0;padding:12px 16px;border:1px dashed var(--sand);border-radius:10px;font-size:.88rem;color:var(--ink-soft);text-align:left}
+  .daftar{list-style:none;padding:0;margin:40px auto 0;max-width:520px;max-height:440px;overflow:auto;border-top:1px solid var(--line);text-align:left}
+  .daftar li{padding:18px 4px;border-bottom:1px solid var(--line)}
+  .u-kepala{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+  .u-kepala strong{font-weight:600;overflow-wrap:anywhere}
+  .u-meta{font-size:.82rem;color:var(--ink-soft)}
+  .daftar p{margin-top:4px;overflow-wrap:anywhere;white-space:pre-line}
+  .kosong{max-width:520px;margin:40px auto 0;color:var(--ink-soft);text-align:center}
+  .kosong .btn{margin-top:12px}
+
+  /* ---------- Hadiah ---------- */
+  .rekening{list-style:none;padding:0;max-width:520px;margin:40px auto 0;text-align:left}
+  .rekening li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:18px 0;border-top:1px solid var(--line)}
+  .rekening li:last-child{border-bottom:1px solid var(--line)}
+  .rekening .bank{font-weight:600}
+  .rekening .nomor{font:400 1.6rem/1.2 var(--serif);letter-spacing:.02em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+  .rekening .an{font-size:.9rem;color:var(--ink-soft)}
+  .rekening .btn{padding:.5rem 1.1rem;font-size:.9rem}
+
+  /* ---------- Penutup ---------- */
+  footer{background:var(--mist);text-align:center;padding:80px 24px calc(64px + env(safe-area-inset-bottom,0px))}
+  footer p{max-width:44ch;margin:0 auto;color:var(--ink-soft)}
+  footer .tanda{font:400 3rem/1 var(--serif);color:var(--ink);margin-top:28px}
+  footer .tanda em{font-style:italic;color:var(--sage-deep);padding:0 .1em}
+
+  /* ---------- Musik ---------- */
+  .musik{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;width:46px;height:46px;border-radius:50%;border:1px solid var(--sage-deep);background:var(--paper);color:var(--sage-deep);display:grid;place-items:center;cursor:pointer}
+  .musik[hidden]{display:none}
+  .musik svg{width:20px;height:20px}
+  .musik.mati::after{content:"";position:absolute;width:26px;height:1.5px;background:currentColor;transform:rotate(-45deg)}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .cover.open{transition:none}
+  }
+</style>
+</head>
+
+<body class="locked">
+<noscript><p style="padding:24px;text-align:center">Undangan ini membutuhkan JavaScript. Aktifkan JavaScript di peramban Anda lalu muat ulang halaman.</p></noscript>
+
+<!-- ============ SAMPUL ============ -->
+<div class="cover" id="cover" role="dialog" aria-label="Sampul undangan">
+  <div class="cover-inner">
+    <div class="arch-frame">
+      <div class="arch">
+        <p class="arch-kecil">Undangan pernikahan</p>
+        <p class="arch-nama" id="cNama1"></p>
+        <p class="arch-dan" aria-hidden="true">&amp;</p>
+        <p class="arch-nama" id="cNama2"></p>
+        <p class="arch-tgl" id="cTgl"></p>
+      </div>
+    </div>
+    <div class="penerima">
+      <p class="sapa">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+      <p class="tamu" id="namaTamu">Tamu undangan</p>
+    </div>
+    <button class="btn utama" id="bukaBtn" type="button">Buka undangan</button>
+  </div>
+</div>
+
+<!-- ============ ISI ============ -->
+<main id="isi" inert>
+
+  <header class="hero" id="beranda">
+    <div id="heroFoto"></div>
+    <p class="salam">Kami mengundang Anda untuk hadir di pernikahan</p>
+    <h1 id="judul"></h1>
+    <p class="tanggal" id="heroTgl"></p>
+    <div class="hitung" id="hitung" aria-hidden="true"></div>
+  </header>
+
+  <section class="section" id="salam" aria-labelledby="salamJudul">
+    <div class="wrap">
+      <h2 class="sr-only" id="salamJudul">Salam pembuka</h2>
+      <p class="salam-isi" id="salamIsi"></p>
+    </div>
+  </section>
+
+  <section class="section" id="mempelai" aria-labelledby="mempelaiJudul">
+    <div class="wrap">
+      <h2 id="mempelaiJudul">Mempelai</h2>
+      <div class="pasangan" id="pasangan"></div>
+    </div>
+  </section>
+
+  <section class="section" id="acara" aria-labelledby="acaraJudul">
+    <div class="wrap">
+      <h2 id="acaraJudul">Acara</h2>
+      <div class="acara-grid" id="acaraGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="galeri" aria-labelledby="galeriJudul" hidden>
+    <div class="wrap">
+      <h2 id="galeriJudul">Galeri</h2>
+      <div class="galeri-grid" id="galeriGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="ucapan" aria-labelledby="ucapanJudul">
+    <div class="wrap">
+      <h2 id="ucapanJudul">Konfirmasi kehadiran dan ucapan</h2>
+      <p class="pengantar">Beri tahu kami apakah Anda dapat hadir, dan tinggalkan doa atau pesan untuk kami.</p>
+
+      <form class="form" id="form" novalidate autocomplete="off">
+        <div>
+          <label for="fNama">Nama</label>
+          <input type="text" id="fNama" name="nama" maxlength="60" required>
+        </div>
+
+        <fieldset class="pilihan" id="pilihHadir">
+          <legend>Apakah Anda akan hadir?</legend>
+          <label><input type="radio" name="hadir" value="Hadir"><span>Hadir</span></label>
+          <label><input type="radio" name="hadir" value="Tidak hadir"><span>Tidak hadir</span></label>
+          <label><input type="radio" name="hadir" value="Masih ragu"><span>Masih ragu</span></label>
+        </fieldset>
+
+        <div id="blokJumlah" hidden>
+          <label for="fJumlah">Jumlah tamu yang hadir</label>
+          <select id="fJumlah" name="jumlah"></select>
+        </div>
+
+        <div>
+          <label for="fPesan">Ucapan dan doa</label>
+          <textarea id="fPesan" name="pesan" maxlength="300"></textarea>
+          <p class="hitungan"><span id="sisa">300</span> karakter tersisa</p>
+        </div>
+
+        <!-- kolom jebakan untuk bot; biarkan kosong -->
+        <div class="jebakan" aria-hidden="true">
+          <label>Situs web <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <button class="btn utama" id="kirimBtn" type="submit">Kirim ucapan</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="pratinjau" id="pratinjau" hidden>Mode pratinjau: ucapan belum disimpan ke Google Sheets. Isi <code>API_URL</code> pada bagian CONFIG di file ini untuk mengaktifkannya.</p>
+
+      <div id="ucapanArea" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section" id="hadiah" aria-labelledby="hadiahJudul" hidden>
+    <div class="wrap">
+      <h2 id="hadiahJudul">Tanda kasih</h2>
+      <p class="pengantar" id="hadiahPengantar"></p>
+      <ul class="rekening" id="rekeningList"></ul>
+      <div id="alamatKado"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p id="penutup"></p>
+  <p class="tanda" id="tandaTangan"></p>
+</footer>
+
+<button class="musik mati" id="musikBtn" type="button" hidden aria-label="Putar musik" aria-pressed="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+</button>
+
+<dialog id="lightbox" aria-label="Foto galeri">
+  <button class="tutup" type="button" aria-label="Tutup foto">&times;</button>
+  <img alt="">
+</dialog>
+
+<script>
+/* =====================================================================
+   CONFIG — ubah bagian ini saja. Semua teks undangan diambil dari sini.
+   ===================================================================== */
+const CONFIG = {
+  // Tempel URL Web App dari Google Apps Script (berakhiran /exec).
+  // Kosongkan untuk mode pratinjau (ucapan tidak disimpan permanen).
+  API_URL: "https://script.google.com/macros/s/AKfycbw3HCEuYhTfXjW8IN9mTGM7uwK4jqNCZ7tNe7l09TTJhAW1m22csU7OUb3Li5jDz2cI/exec",
+
+  tanggal: "2027-10-27",     // format TTTT-BB-HH
+  zona: "WIB",               // WIB, WITA, atau WIT (dipakai untuk hitung mundur dan kalender)
+  maksTamu: 5,               // pilihan jumlah tamu pada form kehadiran
+
+  // Isi dengan alamat file musik (mp3) jika ingin ada musik latar. Kosong = tanpa musik.
+  musik: "",
+
+  salam: "Dengan penuh syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada pernikahan kami.",
+
+  mempelai: [
+    { nama: "Mon", lengkap: "Nama lengkap Mon", keterangan: "Putra/Putri pertama dari", ortu: "Bapak Nama Ayah dan Ibu Nama Ibu", instagram: "", foto: "" },
+    { nama: "Din", lengkap: "Nama lengkap Din", keterangan: "Putra/Putri kedua dari",   ortu: "Bapak Nama Ayah dan Ibu Nama Ibu", instagram: "", foto: "" }
+  ],
+
+  // Foto besar di bagian atas (opsional), contoh: "foto/hero.jpg"
+  fotoUtama: "",
+
+  acara: [
+    { judul: "Akad nikah", mulai: "08:00", selesai: "10:00",
+      tempat: "Kediaman mempelai wanita", alamat: "Tulis alamat lengkap rumah mempelai wanita di sini",
+      peta: "" },                       // tempel link Google Maps (https://maps.app.goo.gl/...)
+    { judul: "Resepsi", mulai: "11:00", selesai: "14:00",
+      tempat: "Kediaman mempelai wanita", alamat: "Tulis alamat lengkap rumah mempelai wanita di sini",
+      peta: "" }
+  ],
+
+  // Daftar alamat foto galeri. Kosong = bagian galeri disembunyikan.
+  galeri: [],
+
+  hadiah: {
+    pengantar: "Kehadiran dan doa Anda sudah menjadi hadiah terbaik bagi kami. Jika berkenan memberi tanda kasih, Anda dapat mengirimkannya melalui:",
+    rekening: [
+      { bank: "Nama bank atau dompet digital", nomor: "0000000000", nama: "Nama pemilik rekening" }
+    ],
+    alamat: ""                          // alamat pengiriman kado fisik (opsional)
+  },
+
+  penutup: "Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu. Terima kasih."
+};
+
+/* =====================================================================
+   Kode aplikasi
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  const $ = (s, r = document) => r.querySelector(s);
+
+  function el(tag, attrs, ...kids) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (v === false || v == null) continue;
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else n.setAttribute(k, v);
+    }
+    kids.flat().forEach(c => { if (c != null) n.append(c.nodeType ? c : document.createTextNode(c)); });
+    return n;
+  }
+  const amanUrl = u => typeof u === "string" && u.trim() !== "" && !/^\s*(javascript|data|vbscript):/i.test(u);
+
+  /* ----- Waktu ----- */
+  const ZONA = {
+    WIB:  { iana: "Asia/Jakarta",  off: "+07:00" },
+    WITA: { iana: "Asia/Makassar", off: "+08:00" },
+    WIT:  { iana: "Asia/Jayapura", off: "+09:00" }
+  }[CONFIG.zona] || { iana: "Asia/Jakarta", off: "+07:00" };
+  const waktu = jam => new Date(`${CONFIG.tanggal}T${jam}:00${ZONA.off}`);
+  const fmt = (d, opt) => new Intl.DateTimeFormat("id-ID", { timeZone: ZONA.iana, ...opt }).format(d);
+  const tglLengkap = d => fmt(d, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const jamId = j => j.replace(":", ".");
+
+  const [m1, m2] = CONFIG.mempelai;
+  const namaPasangan = `${m1.nama} & ${m2.nama}`;
+  const tglAcara = waktu(CONFIG.acara[0].mulai);
+
+  document.title = `Undangan Pernikahan ${namaPasangan}`;
+
+  /* ----- Sampul dan nama tamu ----- */
+  $("#cNama1").textContent = m1.nama;
+  $("#cNama2").textContent = m2.nama;
+  $("#cTgl").textContent = fmt(tglAcara, { day: "numeric", month: "long", year: "numeric" });
+
+  let namaTamu = "";
+  try {
+    namaTamu = (new URLSearchParams(location.search).get("to") || "").replace(/\s+/g, " ").trim().slice(0, 60);
+  } catch (e) { /* abaikan */ }
+  if (namaTamu) $("#namaTamu").textContent = namaTamu;
+  $("#fNama").value = namaTamu;
+
+  /* ----- Hero ----- */
+  $("#judul").append(m1.nama, el("em", { text: "&" }), m2.nama);
+  $("#heroTgl").textContent = tglLengkap(tglAcara);
+  if (amanUrl(CONFIG.fotoUtama)) {
+    $("#heroFoto").append(el("div", { class: "hero-foto" }, el("img", { src: CONFIG.fotoUtama, alt: `Foto ${namaPasangan}` })));
+  }
+
+  /* ----- Hitung mundur ----- */
+  const hitung = $("#hitung");
+  const kotak = ["Hari", "Jam", "Menit", "Detik"].map(label => {
+    const b = el("b", { text: "0" });
+    hitung.append(el("div", {}, b, el("span", { text: label })));
+    return b;
+  });
+  const sr = el("p", { class: "sr-only", text: `Acara berlangsung pada ${tglLengkap(tglAcara)}.` });
+  hitung.after(sr);
+  let timer;
+  function tick() {
+    const s = Math.floor((tglAcara - Date.now()) / 1000);
+    if (s <= 0) {
+      hitung.replaceChildren(el("p", { class: "hitung-selesai", text: "Hari bahagia telah tiba" }));
+      clearInterval(timer);
+      return;
+    }
+    const v = [Math.floor(s / 86400), Math.floor((s % 86400) / 3600), Math.floor((s % 3600) / 60), s % 60];
+    v.forEach((n, i) => { kotak[i].textContent = i === 0 ? String(n) : String(n).padStart(2, "0"); });
+  }
+  tick();
+  timer = setInterval(tick, 1000);
+
+  /* ----- Salam dan mempelai ----- */
+  $("#salamIsi").textContent = CONFIG.salam;
+
+  const pasangan = $("#pasangan");
+  CONFIG.mempelai.forEach(m => {
+    const a = el("article", { class: "orang" });
+    if (amanUrl(m.foto)) a.append(el("div", { class: "foto" }, el("img", { src: m.foto, alt: `Foto ${m.nama}`, loading: "lazy" })));
+    a.append(
+      el("h3", { text: m.nama }),
+      el("p", { class: "lengkap", text: m.lengkap }),
+      el("p", { class: "ortu" }, m.keterangan, el("br"), m.ortu)
+    );
+    if (m.instagram) {
+      const h = m.instagram.replace(/^@/, "").replace(/[^\w.]/g, "");
+      a.append(el("a", { class: "ig", href: `https://instagram.com/${h}`, target: "_blank", rel: "noopener", text: `@${h}` }));
+    }
+    pasangan.append(a);
+  });
+
+  /* ----- Acara ----- */
+  const z = d => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  function linkKalender(a) {
+    const mulai = waktu(a.mulai);
+    const selesai = a.selesai ? waktu(a.selesai) : new Date(mulai.getTime() + 2 * 3600 * 1000);
+    const p = new URLSearchParams({
+      action: "TEMPLATE",
+      text: `${a.judul} ${namaPasangan}`,
+      details: `Undangan pernikahan ${namaPasangan}`,
+      location: [a.tempat, a.alamat].filter(Boolean).join(", ")
+    });
+    return `https://calendar.google.com/calendar/render?${p}&dates=${z(mulai)}/${z(selesai)}`;
+  }
+  const acaraGrid = $("#acaraGrid");
+  CONFIG.acara.forEach(a => {
+    const jam = a.selesai ? `${jamId(a.mulai)} sampai ${jamId(a.selesai)} ${CONFIG.zona}` : `${jamId(a.mulai)} ${CONFIG.zona} sampai selesai`;
+    const aksi = el("div", { class: "aksi" });
+    if (amanUrl(a.peta)) aksi.append(el("a", { class: "btn", href: a.peta, target: "_blank", rel: "noopener", text: "Lihat peta" }));
+    aksi.append(el("a", { class: "btn", href: linkKalender(a), target: "_blank", rel: "noopener", text: "Simpan ke kalender" }));
+    acaraGrid.append(el("article", { class: "acara" },
+      el("h3", { text: a.judul }),
+      el("p", { class: "waktu", text: tglLengkap(waktu(a.mulai)) }),
+      el("p", { text: jam }),
+      el("p", { class: "tempat", text: a.tempat }),
+      el("p", { class: "alamat", text: a.alamat }),
+      aksi
+    ));
+  });
+
+  /* ----- Galeri ----- */
+  const fotoGaleri = (CONFIG.galeri || []).filter(amanUrl);
+  if (fotoGaleri.length) {
+    $("#galeri").hidden = false;
+    const lb = $("#lightbox"), lbImg = $("img", lb);
+    fotoGaleri.forEach((src, i) => {
+      const b = el("button", { type: "button", "aria-label": `Perbesar foto ${i + 1}` }, el("img", { src, alt: `Foto galeri ${i + 1}`, loading: "lazy" }));
+      b.addEventListener("click", () => { lbImg.src = src; lbImg.alt = `Foto galeri ${i + 1}`; lb.showModal(); });
+      $("#galeriGrid").append(b);
+    });
+    $(".tutup", lb).addEventListener("click", () => lb.close());
+    lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+  }
+
+  /* ----- Hadiah ----- */
+  async function salin(teks, tombol, awal) {
+    try { await navigator.clipboard.writeText(teks); }
+    catch (e) {
+      const t = el("textarea", { "aria-hidden": "true" });
+      t.value = teks; t.style.cssText = "position:fixed;opacity:0;top:0";
+      document.body.append(t); t.select();
+      try { document.execCommand("copy"); } catch (e2) { /* abaikan */ }
+      t.remove();
+    }
+    tombol.textContent = "Tersalin";
+    setTimeout(() => { tombol.textContent = awal; }, 2000);
+  }
+  const H = CONFIG.hadiah || {};
+  const rek = (H.rekening || []).filter(r => r.nomor);
+  if (rek.length || H.alamat) {
+    $("#hadiah").hidden = false;
+    $("#hadiahPengantar").textContent = H.pengantar || "";
+    rek.forEach(r => {
+      const btn = el("button", { class: "btn", type: "button", "aria-live": "polite", text: "Salin nomor" });
+      btn.addEventListener("click", () => salin(r.nomor, btn, "Salin nomor"));
+      $("#rekeningList").append(el("li", {},
+        el("div", {}, el("p", { class: "bank", text: r.bank }), el("p", { class: "nomor", text: r.nomor }), el("p", { class: "an", text: `a.n. ${r.nama}` })),
+        btn
+      ));
+    });
+    if (H.alamat) {
+      const btn = el("button", { class: "btn", type: "button", "aria-live": "polite", text: "Salin alamat" });
+      btn.addEventListener("click", () => salin(H.alamat, btn, "Salin alamat"));
+      $("#alamatKado").append(el("ul", { class: "rekening" }, el("li", {},
+        el("div", {}, el("p", { class: "bank", text: "Kirim kado ke alamat" }), el("p", { text: H.alamat })), btn)));
+    }
+  }
+
+  /* ----- Penutup ----- */
+  $("#penutup").textContent = CONFIG.penutup;
+  $("#tandaTangan").append(m1.nama, el("em", { text: "&" }), m2.nama);
+
+  /* ----- Musik ----- */
+  const musikBtn = $("#musikBtn");
+  let audio = null;
+  function setMusik(on) {
+    musikBtn.classList.toggle("mati", !on);
+    musikBtn.setAttribute("aria-pressed", String(on));
+    musikBtn.setAttribute("aria-label", on ? "Jeda musik" : "Putar musik");
+  }
+  if (amanUrl(CONFIG.musik)) {
+    audio = new Audio(CONFIG.musik);
+    audio.loop = true;
+    musikBtn.hidden = false;
+    musikBtn.addEventListener("click", () => {
+      if (audio.paused) audio.play().then(() => setMusik(true)).catch(() => setMusik(false));
+      else { audio.pause(); setMusik(false); }
+    });
+  }
+
+  /* ----- Buka undangan ----- */
+  const cover = $("#cover"), isi = $("#isi");
+  $("#bukaBtn").addEventListener("click", () => {
+    cover.classList.add("open");
+    cover.setAttribute("aria-hidden", "true");
+    cover.inert = true;
+    document.body.classList.remove("locked");
+    isi.removeAttribute("inert");
+    window.scrollTo(0, 0);
+    isi.setAttribute("tabindex", "-1");
+    isi.focus({ preventScroll: true });
+    if (audio) audio.play().then(() => setMusik(true)).catch(() => setMusik(false));
+  });
+
+  /* =====================================================================
+     RSVP dan ucapan
+     ===================================================================== */
+  const DEMO = [
+    { nama: "Contoh tamu", hadir: "Hadir", jumlah: 2, pesan: "Selamat menempuh hidup baru. Semoga bahagia selalu.", waktu: new Date().toISOString() }
+  ];
+  const demoMode = !CONFIG.API_URL;
+  if (demoMode) { $("#pratinjau").hidden = false; console.info("[Undangan] API_URL kosong: berjalan dalam mode pratinjau."); }
+
+  async function ambilUcapan() {
+    if (demoMode) return DEMO.slice();
+    const r = await fetch(CONFIG.API_URL);
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || "gagal");
+    return j.data || [];
+  }
+  async function kirimUcapan(d) {
+    if (demoMode) { DEMO.unshift({ ...d, waktu: new Date().toISOString() }); return; }
+    const r = await fetch(CONFIG.API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },   // menghindari preflight CORS
+      body: JSON.stringify(d)
+    });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || "gagal");
+  }
+
+  const area = $("#ucapanArea");
+  let daftarEl = null;
+
+  function itemUcapan(u) {
+    const d = new Date(u.waktu);
+    const tgl = isNaN(d) ? "" : new Intl.DateTimeFormat("id-ID", { day: "numeric", month: "short", year: "numeric" }).format(d);
+    const meta = [u.hadir, tgl].filter(Boolean).join(", ");
+    const li = el("li", {}, el("div", { class: "u-kepala" }, el("strong", { text: u.nama }), el("span", { class: "u-meta", text: meta })));
+    if (u.pesan) li.append(el("p", { text: u.pesan }));
+    return li;
+  }
+  function tampilkan(data) {
+    if (!data.length) {
+      area.replaceChildren(el("p", { class: "kosong", text: "Belum ada ucapan. Jadilah yang pertama." }));
+      daftarEl = null;
+      return;
+    }
+    daftarEl = el("ol", { class: "daftar", tabindex: "0", "aria-label": "Daftar ucapan" });
+    data.forEach(u => daftarEl.append(itemUcapan(u)));
+    area.replaceChildren(daftarEl);
+  }
+  function muat() {
+    area.replaceChildren(el("p", { class: "kosong", text: "Memuat ucapan…" }));
+    ambilUcapan().then(tampilkan).catch(() => {
+      const ulang = el("button", { class: "btn", type: "button", text: "Coba lagi" });
+      ulang.addEventListener("click", muat);
+      area.replaceChildren(el("div", { class: "kosong" }, el("p", { text: "Ucapan belum bisa dimuat. Periksa koneksi internet Anda." }), ulang));
+    });
+  }
+  muat();
+
+  /* ----- Form ----- */
+  const form = $("#form"), status = $("#status"), kirimBtn = $("#kirimBtn");
+  const selJumlah = $("#fJumlah");
+  for (let i = 1; i <= CONFIG.maksTamu; i++) selJumlah.append(el("option", { value: String(i), text: `${i} orang` }));
+
+  form.addEventListener("change", e => {
+    if (e.target.name === "hadir") $("#blokJumlah").hidden = e.target.value !== "Hadir";
+  });
+  $("#fPesan").addEventListener("input", e => { $("#sisa").textContent = 300 - e.target.value.length; });
+
+  function setStatus(teks, jenis) {
+    status.textContent = teks;
+    status.className = "status" + (jenis ? " " + jenis : "");
+  }
+  const JEDA = 30 * 1000;
+  function terakhirKirim() { try { return Number(localStorage.getItem("undangan_terakhir")) || 0; } catch (e) { return 0; } }
+  function catatKirim() { try { localStorage.setItem("undangan_terakhir", String(Date.now())); } catch (e) { /* abaikan */ } }
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    if (form.website.value) return;                       // bot terdeteksi
+
+    const nama = form.nama.value.trim();
+    const hadir = form.hadir.value;
+    const pesan = form.pesan.value.trim();
+    const jumlah = hadir === "Hadir" ? Number(form.jumlah.value) || 1 : 0;
+
+    if (!nama) { setStatus("Isi nama Anda terlebih dahulu.", "galat"); form.nama.focus(); return; }
+    if (!hadir) { setStatus("Pilih salah satu konfirmasi kehadiran.", "galat"); return; }
+    if (Date.now() - terakhirKirim() < JEDA) { setStatus("Mohon tunggu sebentar sebelum mengirim lagi.", "galat"); return; }
+
+    kirimBtn.disabled = true; kirimBtn.textContent = "Mengirim…"; setStatus("");
+    try {
+      await kirimUcapan({ nama, hadir, jumlah, pesan, website: "" });
+      catatKirim();
+      const baru = { nama, hadir, jumlah, pesan, waktu: new Date().toISOString() };
+      if (!daftarEl) { tampilkan([baru]); } else { daftarEl.prepend(itemUcapan(baru)); }
+      form.pesan.value = ""; $("#sisa").textContent = "300";
+      setStatus("Terima kasih. Konfirmasi dan ucapan Anda sudah terkirim.", "ok");
+    } catch (err) {
+      setStatus("Ucapan belum terkirim. Periksa koneksi internet lalu coba lagi.", "galat");
+    } finally {
+      kirimBtn.disabled = false; kirimBtn.textContent = "Kirim ucapan";
+    }
+  });
+})();
+</script>
+</body>
+</html>
