@@ -45,7 +45,7 @@
   /* ---------- Sampul ---------- */
   .cover{position:fixed;inset:0;z-index:50;background:var(--mist);overflow:auto;display:grid;place-items:center;padding:24px;text-align:center}
   .cover.open{transform:translateY(-100%);visibility:hidden;transition:transform .9s cubic-bezier(.7,0,.2,1),visibility 0s linear .9s}
-  .cover-inner{display:flex;flex-direction:column;align-items:center;gap:28px;padding:8px 0}
+  .cover-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:28px;padding:8px 0}
   .arch-frame{overflow:hidden;padding:24px 24px 0}
   .arch{width:min(62vw,250px);aspect-ratio:3/4;border:1px solid var(--sage);border-bottom:0;border-radius:999px 999px 0 0;
         box-shadow:0 0 0 10px var(--mist),0 0 0 11px var(--sand),0 0 0 21px var(--mist),0 0 0 22px var(--line);
@@ -59,14 +59,17 @@
   .penerima .tamu{font:400 1.9rem/1.2 var(--serif);margin:4px 0 0;overflow-wrap:anywhere}
 
   /* ---------- Bagian umum ---------- */
-  .section{padding:88px 24px;text-align:center}
+  .section{position:relative;padding:88px 24px;text-align:center}
   .section+.section{border-top:1px solid var(--line)}
+  /* ornamen daun di tengah garis pemisah antarbagian */
+  .section+.section::before{content:"";position:absolute;left:50%;top:0;width:180px;height:24px;transform:translate(-50%,-50%);background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 24' fill='none' stroke='%238FA08A' stroke-width='1' stroke-linejoin='round'%3E%3Cpath d='M110 5 L117 12 L110 19 L103 12Z'/%3E%3Cpath d='M99 12 C92 5 82 5 74 12 C82 19 92 19 99 12Z M99 12 L77 12' fill='%238FA08A' fill-opacity='.14'/%3E%3Cpath d='M121 12 C128 5 138 5 146 12 C138 19 128 19 121 12Z M121 12 L143 12' fill='%238FA08A' fill-opacity='.14'/%3E%3Ccircle cx='62' cy='12' r='1.6' fill='%23C9B89B' stroke='none'/%3E%3Ccircle cx='158' cy='12' r='1.6' fill='%23C9B89B' stroke='none'/%3E%3C/svg%3E") center/contain no-repeat}
   .wrap{max-width:720px;margin:0 auto}
   .section h2{font-size:clamp(2rem,6vw,2.6rem);line-height:1.1;margin-bottom:12px}
   .pengantar{max-width:48ch;margin:0 auto;color:var(--ink-soft)}
 
   /* ---------- Hero ---------- */
-  .hero{background:var(--mist);padding:104px 24px 80px;text-align:center;border-top:0!important}
+  .hero{position:relative;overflow:hidden;background:var(--mist);padding:104px 24px 80px;text-align:center;border-top:0!important}
+  .hero>:not(.hias):not(.sr-only){position:relative;z-index:1}
   .hero .salam{font-size:.95rem;color:var(--ink-soft);margin-bottom:20px}
   .hero h1{font-size:clamp(3.6rem,16vw,7rem);line-height:.95;letter-spacing:-.01em}
   .hero h1 em{font-style:italic;color:var(--sage-deep);padding:0 .1em}
@@ -77,15 +80,19 @@
   .hitung b{display:block;font:400 clamp(2rem,9vw,3.2rem)/1 var(--serif);font-variant-numeric:tabular-nums}
   .hitung span{font-size:.85rem;color:var(--ink-soft)}
   .hitung-selesai{font:italic 400 1.5rem/1.3 var(--serif);color:var(--sage-deep)}
-  .hero-foto{width:min(70vw,300px);aspect-ratio:3/4;margin:0 auto 40px;border-radius:999px 999px 0 0;overflow:hidden;background:var(--paper)}
-  .hero-foto img,.orang .foto img{width:100%;height:100%;object-fit:cover}
+  /* bingkai foto berbentuk lengkung dengan cincin tipis */
+  .bingkai{width:min(62%,210px);margin:0 auto 26px;padding:10px 10px 0;overflow:hidden}
+  .bingkai.besar{width:min(76vw,320px);margin-bottom:40px}
+  .bingkai .foto{width:100%;aspect-ratio:3/4;border-radius:999px 999px 0 0;overflow:hidden;background:var(--mist);box-shadow:0 0 0 7px var(--paper),0 0 0 8px var(--sand)}
+  .hero .bingkai .foto{background:var(--paper);box-shadow:0 0 0 7px var(--mist),0 0 0 8px var(--sand)}
+  .bingkai .foto.inisial{display:grid;place-items:center;font:italic 400 clamp(4rem,16vw,5.5rem)/1 var(--serif);color:var(--sage-deep);border:1px solid var(--sage);border-bottom:0}
+  .bingkai .foto img{width:100%;height:100%;object-fit:cover}
 
   /* ---------- Salam ---------- */
   .salam-isi{font:400 clamp(1.4rem,4.5vw,1.8rem)/1.45 var(--serif);max-width:30em;margin:0 auto;text-wrap:balance}
 
   /* ---------- Mempelai ---------- */
   .pasangan{display:grid;gap:56px;margin-top:48px}
-  .orang .foto{width:min(62%,200px);aspect-ratio:3/4;margin:0 auto 22px;border-radius:999px 999px 0 0;overflow:hidden;background:var(--mist)}
   .orang h3{font-size:2.6rem;line-height:1}
   .orang .lengkap{margin-top:8px;font-weight:600}
   .orang .ortu{margin-top:6px;color:var(--ink-soft);font-size:.95rem}
@@ -93,17 +100,15 @@
   @media(min-width:640px){.pasangan{grid-template-columns:1fr 1fr;gap:40px}}
 
   /* ---------- Acara ---------- */
-  .acara-grid{display:grid;gap:56px;margin-top:48px}
+  .acara-grid{display:grid;gap:28px;margin-top:48px;justify-items:center}
+  .acara{position:relative;width:min(100%,340px);padding:76px 28px 36px;border:1px solid var(--sand);border-radius:170px 170px 16px 16px;background:rgba(255,255,255,.4)}
+  .acara::before{content:"";position:absolute;inset:7px;border:1px solid var(--line);border-radius:163px 163px 10px 10px;pointer-events:none}
   .acara h3{font-size:2rem;line-height:1.1}
   .acara .waktu{margin-top:14px;font-weight:600}
   .acara .tempat{margin-top:14px}
   .acara .alamat{color:var(--ink-soft);font-size:.95rem;max-width:30ch;margin:2px auto 0}
   .acara .aksi{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
-  @media(min-width:640px){
-    .acara-grid{grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:0}
-    .acara{padding:0 32px}
-    .acara+.acara{border-left:1px solid var(--line)}
-  }
+  @media(min-width:760px){.acara-grid{grid-template-columns:repeat(auto-fit,340px);justify-content:center;align-items:start}}
 
   /* ---------- Galeri ---------- */
   .galeri-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:40px}
@@ -151,7 +156,8 @@
   .rekening .btn{padding:.5rem 1.1rem;font-size:.9rem}
 
   /* ---------- Penutup ---------- */
-  footer{background:var(--mist);text-align:center;padding:80px 24px calc(64px + env(safe-area-inset-bottom,0px))}
+  footer{position:relative;overflow:hidden;background:var(--mist);text-align:center;padding:80px 24px calc(64px + env(safe-area-inset-bottom,0px))}
+  footer>:not(.hias){position:relative;z-index:1}
   footer p{max-width:44ch;margin:0 auto;color:var(--ink-soft)}
   footer .tanda{font:400 3rem/1 var(--serif);color:var(--ink);margin-top:28px}
   footer .tanda em{font-style:italic;color:var(--sage-deep);padding:0 .1em}
@@ -166,6 +172,30 @@
     html{scroll-behavior:auto}
     .cover.open{transition:none}
   }
+
+  /* ---------- Dekorasi: ranting daun ---------- */
+  .hias{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+  .hias .kotak{position:absolute;left:50%;top:0;bottom:0;width:min(100%,var(--lebar,560px));transform:translateX(-50%)}
+  .ranting{position:absolute;width:var(--w,clamp(56px,17vw,116px));height:auto;aspect-ratio:1/3;overflow:visible;
+           fill:none;stroke:var(--sage);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+  .ranting .daun{fill:var(--sage);fill-opacity:.14}
+  .r-bkiri{left:-1%;bottom:-40px;transform-origin:50% 100%;transform:rotate(20deg)}
+  .r-bkanan{right:-1%;bottom:-40px;transform-origin:50% 100%;transform:scaleX(-1) rotate(20deg)}
+  .r-akiri{left:1%;top:-84px;transform:rotate(160deg);--w:clamp(40px,12vw,84px);--tunda:.5s}
+  .r-akanan{right:1%;top:-84px;transform:scaleX(-1) rotate(160deg);--w:clamp(40px,12vw,84px);--tunda:.5s}
+  .hero .ranting{--w:clamp(44px,11vw,96px)}
+  @media(max-width:699px){.hero .r-akiri,.hero .r-akanan{display:none}}
+
+  /* ranting tergambar sendiri: sekali di sampul, sekali saat undangan dibuka */
+  .cover .ranting .batang,body.terbuka .hero .ranting .batang{stroke-dasharray:1;animation:gambar 1.8s cubic-bezier(.4,0,.2,1) both;animation-delay:var(--tunda,0s)}
+  .cover .ranting .daun,body.terbuka .hero .ranting .daun{stroke-dasharray:1;stroke-linecap:butt;
+    animation:gambar .9s ease-out both,isi .8s ease-out both;
+    animation-delay:calc(var(--tunda,0s) + .5s + var(--i,0)*.16s),calc(var(--tunda,0s) + .9s + var(--i,0)*.16s)}
+  @keyframes gambar{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  @keyframes isi{from{fill-opacity:0}to{fill-opacity:.14}}
+  @media (prefers-reduced-motion:reduce){
+    .ranting .batang,.ranting .daun{animation:none!important;stroke-dasharray:none!important}
+  }
 </style>
 </head>
 
@@ -174,6 +204,7 @@
 
 <!-- ============ SAMPUL ============ -->
 <div class="cover" id="cover" role="dialog" aria-label="Sampul undangan">
+  <div class="hias" aria-hidden="true"><div class="kotak" id="hiasCover"></div></div>
   <div class="cover-inner">
     <div class="arch-frame">
       <div class="arch">
@@ -196,6 +227,7 @@
 <main id="isi" inert>
 
   <header class="hero" id="beranda">
+    <div class="hias" aria-hidden="true"><div class="kotak" id="hiasHero" style="--lebar:920px"></div></div>
     <div id="heroFoto"></div>
     <p class="salam">Kami mengundang Anda untuk hadir di pernikahan</p>
     <h1 id="judul"></h1>
@@ -287,6 +319,7 @@
 </main>
 
 <footer>
+  <div class="hias" aria-hidden="true"><div class="kotak" id="hiasFooter" style="--lebar:720px"></div></div>
   <p id="penutup"></p>
   <p class="tanda" id="tandaTangan"></p>
 </footer>
@@ -368,6 +401,38 @@ const CONFIG = {
     kids.flat().forEach(c => { if (c != null) n.append(c.nodeType ? c : document.createTextNode(c)); });
     return n;
   }
+  /* ----- Dekorasi ranting daun ----- */
+  const NS = "http://www.w3.org/2000/svg";
+  const BENTUK_DAUN = "M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0";
+  const LETAK_DAUN = [   // [x, y, putar, skala]
+    [39, 205, -40, 1.1], [39, 180, -140, 1.05], [42, 150, -42, 1], [44, 125, -138, .95],
+    [44, 95, -45, .9], [43, 72, -135, .8], [41, 48, -48, .7], [40, 30, -132, .6], [40, 14, -90, .6]
+  ];
+  function ranting(kelas) {
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 80 240");
+    svg.setAttribute("class", "ranting " + kelas);
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    const batang = document.createElementNS(NS, "path");
+    batang.setAttribute("d", "M40 238 C36 180 46 110 40 14");
+    batang.setAttribute("pathLength", "1");
+    batang.setAttribute("class", "batang");
+    svg.append(batang);
+    LETAK_DAUN.forEach((d, i) => {
+      const p = document.createElementNS(NS, "path");
+      p.setAttribute("d", BENTUK_DAUN);
+      p.setAttribute("pathLength", "1");
+      p.setAttribute("class", "daun");
+      p.setAttribute("transform", `translate(${d[0]} ${d[1]}) rotate(${d[2]}) scale(${d[3]})`);
+      p.style.setProperty("--i", i);
+      svg.append(p);
+    });
+    return svg;
+  }
+  ["r-bkiri", "r-bkanan", "r-akiri", "r-akanan"].forEach(k => { $("#hiasCover").append(ranting(k)); $("#hiasHero").append(ranting(k)); });
+  ["r-bkiri", "r-bkanan"].forEach(k => $("#hiasFooter").append(ranting(k)));
+
   const amanUrl = u => typeof u === "string" && u.trim() !== "" && !/^\s*(javascript|data|vbscript):/i.test(u);
 
   /* ----- Waktu ----- */
@@ -403,7 +468,7 @@ const CONFIG = {
   $("#judul").append(m1.nama, el("em", { text: "&" }), m2.nama);
   $("#heroTgl").textContent = tglLengkap(tglAcara);
   if (amanUrl(CONFIG.fotoUtama)) {
-    $("#heroFoto").append(el("div", { class: "hero-foto" }, el("img", { src: CONFIG.fotoUtama, alt: `Foto ${namaPasangan}` })));
+    $("#heroFoto").append(el("div", { class: "bingkai besar" }, el("div", { class: "foto" }, el("img", { src: CONFIG.fotoUtama, alt: `Foto ${namaPasangan}` }))));
   }
 
   /* ----- Hitung mundur ----- */
@@ -435,7 +500,8 @@ const CONFIG = {
   const pasangan = $("#pasangan");
   CONFIG.mempelai.forEach(m => {
     const a = el("article", { class: "orang" });
-    if (amanUrl(m.foto)) a.append(el("div", { class: "foto" }, el("img", { src: m.foto, alt: `Foto ${m.nama}`, loading: "lazy" })));
+    if (amanUrl(m.foto)) a.append(el("div", { class: "bingkai" }, el("div", { class: "foto" }, el("img", { src: m.foto, alt: `Foto ${m.nama}`, loading: "lazy" }))));
+    else a.append(el("div", { class: "bingkai", "aria-hidden": "true" }, el("div", { class: "foto inisial", text: m.nama.charAt(0) })));
     a.append(
       el("h3", { text: m.nama }),
       el("p", { class: "lengkap", text: m.lengkap }),
@@ -551,6 +617,7 @@ const CONFIG = {
   const cover = $("#cover"), isi = $("#isi");
   $("#bukaBtn").addEventListener("click", () => {
     cover.classList.add("open");
+    document.body.classList.add("terbuka");
     cover.setAttribute("aria-hidden", "true");
     cover.inert = true;
     document.body.classList.remove("locked");
@@ -668,4 +735,3 @@ const CONFIG = {
 </script>
 </body>
 </html>
-
