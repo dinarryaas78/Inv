@@ -196,6 +196,155 @@
   @media (prefers-reduced-motion:reduce){
     .ranting .batang,.ranting .daun{animation:none!important;stroke-dasharray:none!important}
   }
+
+  /* ---------- Gerak dan dekorasi tambahan ---------- */
+  .section>.wrap{position:relative;z-index:1}
+
+  /* ranting di tepi bagian, bergoyang pelan */
+  @keyframes ayun{from{rotate:-2.2deg}to{rotate:2.2deg}}
+  .ranting{animation:ayun var(--dur-ayun,8s) ease-in-out var(--ayun,0s) infinite alternate}
+  .r-skiri,.r-skanan{--w:clamp(34px,7vw,70px);transform-origin:50% 100%}
+  .r-skiri{left:calc(var(--w)*-.45);transform:rotate(8deg)}
+  .r-skanan{right:calc(var(--w)*-.45);transform:scaleX(-1) rotate(8deg)}
+
+  /* sampul: lengkungan melayang pelan */
+  @keyframes melayang{from{transform:translateY(0)}to{transform:translateY(-7px)}}
+  .arch-frame{animation:melayang 7s ease-in-out infinite alternate}
+
+  /* kerlip kecil */
+  .kerlip{position:absolute;width:var(--k,8px);height:var(--k,8px);background:#B9A584;opacity:0;
+          clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);
+          animation:kerlip var(--dk,4s) ease-in-out var(--tk,0s) infinite}
+  @keyframes kerlip{0%,100%{opacity:0;transform:scale(.3) rotate(0deg)}50%{opacity:.85;transform:scale(1) rotate(45deg)}}
+
+  /* kelopak daun yang jatuh pelan */
+  .kelopak-wadah{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:60}
+  .kelopak{position:absolute;top:0;left:var(--x,50%);width:var(--s,14px);height:calc(var(--s,14px)*1.5);opacity:0;will-change:transform;
+           background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 30'%3E%3Cpath d='M10 0 C18 8 18 22 10 30 C2 22 2 8 10 0Z' fill='%238FA08A'/%3E%3Cpath d='M10 5 L10 27' stroke='%23F2F4EF' stroke-width='.9' opacity='.7'/%3E%3C/svg%3E") center/contain no-repeat;
+           animation:jatuh var(--d,20s) linear var(--t,0s) infinite}
+  .kelopak.pasir{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 30'%3E%3Cpath d='M10 0 C18 8 18 22 10 30 C2 22 2 8 10 0Z' fill='%23C9B89B'/%3E%3Cpath d='M10 5 L10 27' stroke='%23F2F4EF' stroke-width='.9' opacity='.7'/%3E%3C/svg%3E")}
+  @keyframes jatuh{
+    0%{transform:translate3d(0,-10vh,0) rotate(0deg);opacity:0}
+    8%{opacity:.7}
+    25%{transform:translate3d(var(--g,30px),22vh,0) rotate(70deg)}
+    50%{transform:translate3d(calc(var(--g,30px)*-1),50vh,0) rotate(160deg)}
+    75%{transform:translate3d(var(--g,30px),78vh,0) rotate(250deg)}
+    92%{opacity:.7}
+    100%{transform:translate3d(calc(var(--g,30px)*-.5),108vh,0) rotate(330deg);opacity:0}
+  }
+
+  /* bagian atas undangan muncul bertahap setelah sampul dibuka */
+  @keyframes naik{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  body.terbuka .hero .bingkai.besar{animation:naik 1s ease-out .15s both}
+  body.terbuka .hero .salam{animation:naik 1s ease-out .35s both}
+  body.terbuka .hero h1{animation:naik 1s ease-out .5s both}
+  body.terbuka .hero .tanggal{animation:naik 1s ease-out .7s both}
+  body.terbuka .hero .hitung{animation:naik 1s ease-out .9s both}
+
+  /* bagian lain muncul saat digulir (kelas ditambahkan lewat JS) */
+  .ungkap{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease}
+  .ungkap.tampak{opacity:1;transform:none}
+
+  /* kutipan kitab suci */
+  .kutipan{padding:96px 24px}
+  .kutipan blockquote{margin:0 auto;max-width:34em}
+  .kutipan blockquote::before{content:"“";display:block;font:400 5rem/1 var(--serif);color:var(--sand);height:2.6rem}
+  .kutipan .asli{font:400 clamp(1.7rem,6vw,2.2rem)/2 var(--serif);margin-bottom:12px}
+  .kutipan .teks{font:italic 400 clamp(1.3rem,4.4vw,1.7rem)/1.5 var(--serif);text-wrap:balance}
+  .kutipan .sumber{margin-top:22px;font-size:.92rem;color:var(--ink-soft)}
+
+  @media (prefers-reduced-motion:reduce){
+    .ranting,.arch-frame,.kerlip,.kelopak{animation:none!important}
+    body.terbuka .hero .bingkai.besar,body.terbuka .hero .salam,body.terbuka .hero h1,
+    body.terbuka .hero .tanggal,body.terbuka .hero .hitung{animation:none!important}
+  }
+
+  /* ---------- Ramai: lapisan tambahan ---------- */
+  @keyframes putar{to{rotate:360deg}}
+  @keyframes mekar{from{scale:0;opacity:0}to{scale:1;opacity:1}}
+  @keyframes riak{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.16);opacity:0}}
+  @keyframes naikpelan{
+    0%{transform:translate3d(0,0,0);opacity:0}
+    10%{opacity:.5}
+    50%{transform:translate3d(var(--g,30px),-55vh,0)}
+    90%{opacity:.4}
+    100%{transform:translate3d(calc(var(--g,30px)*-.6),-112vh,0);opacity:0}
+  }
+  @keyframes denyutTombol{0%{box-shadow:0 0 0 0 rgba(79,102,87,.4)}70%,100%{box-shadow:0 0 0 16px rgba(79,102,87,0)}}
+  @keyframes zoompelan{from{scale:1}to{scale:1.08}}
+  @keyframes detak{from{opacity:.35;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  @keyframes kilau{0%,100%{opacity:.35;scale:.8}50%{opacity:1;scale:1.15}}
+  @keyframes cincinKiri{from{translate:0 0}to{translate:-3px 0}}
+  @keyframes cincinKanan{from{translate:0 0}to{translate:3px 0}}
+
+  /* sampul: riak lengkungan yang melebar dan memudar */
+  .arch{position:relative}
+  .arch-frame{padding:60px 40px 0}
+  .arch::before,.arch::after{content:"";position:absolute;inset:0;border:1px solid var(--sand);border-bottom:0;border-radius:999px 999px 0 0;
+    transform-origin:50% 100%;opacity:0;pointer-events:none;animation:riak 6s ease-out infinite}
+  .arch::after{animation-delay:3s}
+  #bukaBtn{animation:denyutTombol 2.6s ease-out infinite}
+
+  /* cincin putus-putus yang berputar pelan di belakang sampul dan hero */
+  .cincin{position:absolute;left:50%;top:50%;width:min(96vw,640px);aspect-ratio:1;translate:-50% -50%;border-radius:50%;
+    border:1px dashed rgba(143,160,138,.55);animation:putar 90s linear infinite}
+  .cincin.b{width:min(76vw,500px);border-style:dotted;border-color:rgba(185,165,132,.8);animation-duration:70s;animation-direction:reverse}
+
+  /* bunga mekar dan berputar pelan */
+  .bunga{position:absolute;width:min(var(--b,50px),14vw);height:auto;aspect-ratio:1;overflow:visible;fill:none;stroke:var(--sage);stroke-width:1.1;stroke-linejoin:round;
+    animation:mekar 1.6s cubic-bezier(.3,1.4,.5,1) var(--tm,0s) both,putar var(--dp,50s) linear infinite}
+  .bunga .p{fill:var(--sage);fill-opacity:.14}
+  .bunga .pusat{fill:#C9B89B;stroke:none}
+  .bunga.mawar{stroke:#C9A79F}
+  .bunga.mawar .p{fill:#D9BFB7;fill-opacity:.35}
+  .hero .bunga{animation:none}
+  body.terbuka .hero .bunga{animation:mekar 1.6s cubic-bezier(.3,1.4,.5,1) var(--tm,0s) both,putar var(--dp,50s) linear infinite}
+  @media(max-width:699px){.bunga.desk{display:none}}
+
+  /* gelembung cahaya naik pelan, kelopak mawar muda */
+  .gelembung{position:absolute;bottom:-30px;left:var(--x,50%);width:var(--s,6px);height:var(--s,6px);border-radius:50%;background:var(--wr,#C9B89B);
+    box-shadow:0 0 10px 2px var(--wr,#C9B89B);opacity:0;will-change:transform;animation:naikpelan var(--d,24s) ease-in var(--t,0s) infinite}
+  .kelopak.mawar{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 30'%3E%3Cpath d='M10 0 C18 8 18 22 10 30 C2 22 2 8 10 0Z' fill='%23D9BFB7'/%3E%3Cpath d='M10 5 L10 27' stroke='%23F2F4EF' stroke-width='.9' opacity='.7'/%3E%3C/svg%3E")}
+
+  /* foto bergerak halus */
+  .bingkai .foto img{animation:zoompelan 18s ease-in-out infinite alternate}
+  .orang .bingkai{animation:melayang 8s ease-in-out infinite alternate}
+  .orang:nth-child(2) .bingkai{animation-duration:10s;animation-delay:-3s}
+  .galeri-grid img{transition:transform .8s ease}
+  .galeri-grid button:hover img,.galeri-grid button:focus-visible img{transform:scale(1.07)}
+
+  /* detik pada hitung mundur berdetak */
+  .hitung b.detak{animation:detak .5s ease-out}
+
+  /* ikon musik berputar saat lagu diputar */
+  .musik:not(.mati) svg{animation:putar 5s linear infinite}
+
+  /* cincin kawin di penutup */
+  .cincin-kawin{display:block;width:90px;height:50px;margin:0 auto 26px;fill:none;stroke-width:1.4;overflow:visible}
+  .cincin-kawin .c1{stroke:var(--sage-deep);animation:cincinKiri 6s ease-in-out infinite alternate}
+  .cincin-kawin .c2{stroke:#B9A584;animation:cincinKanan 6s ease-in-out infinite alternate}
+  .cincin-kawin .gem{fill:#C9B89B;stroke:none;transform-box:fill-box;transform-origin:center;animation:kilau 3s ease-in-out infinite}
+
+  /* tanaman merambat di tepi layar, tumbuh mengikuti gulir */
+  .merambat{position:fixed;top:0;bottom:0;width:26px;z-index:35;pointer-events:none;--p:0;opacity:0;transition:opacity 1s ease 1.2s}
+  body.terbuka .merambat{opacity:1}
+  .merambat.kiri{left:0}
+  .merambat.kanan{right:0}
+  .batang-m{position:absolute;top:0;width:1.5px;height:100%;background:var(--sage);opacity:.7;transform-origin:50% 0;transform:scaleY(var(--p))}
+  .kiri .batang-m{left:3px}
+  .kanan .batang-m{right:3px}
+  .daun-m{position:absolute;top:calc(var(--at)*100%);width:16px;height:24px;transform-origin:50% 100%;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 30'%3E%3Cpath d='M10 0 C18 8 18 22 10 30 C2 22 2 8 10 0Z' fill='%238FA08A'/%3E%3Cpath d='M10 5 L10 27' stroke='%23F2F4EF' stroke-width='.9' opacity='.7'/%3E%3C/svg%3E") center/contain no-repeat;
+    opacity:clamp(0,calc((var(--p) - var(--at))*12),1);scale:clamp(0,calc((var(--p) - var(--at))*12),1);rotate:var(--r,35deg)}
+  .kiri .daun-m{left:-5px}
+  .kanan .daun-m{right:-5px}
+
+  @media (prefers-reduced-motion:reduce){
+    .cincin,.bunga,.gelembung,#bukaBtn,.musik svg,.bingkai .foto img,.orang .bingkai,
+    .cincin-kawin .c1,.cincin-kawin .c2,.cincin-kawin .gem,.hitung b{animation:none!important}
+    .arch::before,.arch::after{animation:none!important;opacity:0}
+    body.terbuka .hero .bunga{animation:none!important}
+  }
 </style>
 </head>
 
@@ -234,6 +383,16 @@
     <p class="tanggal" id="heroTgl"></p>
     <div class="hitung" id="hitung" aria-hidden="true"></div>
   </header>
+
+  <section class="section kutipan" id="kutipan" aria-label="Kutipan kitab suci">
+    <div class="wrap">
+      <blockquote>
+        <p class="asli" id="kAsli" dir="auto" hidden></p>
+        <p class="teks" id="kTeks"></p>
+        <p class="sumber" id="kSumber"></p>
+      </blockquote>
+    </div>
+  </section>
 
   <section class="section" id="salam" aria-labelledby="salamJudul">
     <div class="wrap">
@@ -320,6 +479,7 @@
 
 <footer>
   <div class="hias" aria-hidden="true"><div class="kotak" id="hiasFooter" style="--lebar:720px"></div></div>
+  <svg class="cincin-kawin" viewBox="0 0 90 50" aria-hidden="true" focusable="false"><circle class="c1" cx="33" cy="28" r="16"/><circle class="c2" cx="57" cy="28" r="16"/><path class="gem" d="M33 5 L37.5 10.5 L33 16 L28.5 10.5Z"/></svg>
   <p id="penutup"></p>
   <p class="tanda" id="tandaTangan"></p>
 </footer>
@@ -350,6 +510,14 @@ const CONFIG = {
   musik: "Lagu.mp3",
 
   salam: "Dengan penuh syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada pernikahan kami.",
+
+  // Kutipan dari kitab suci, tampil tepat setelah nama mempelai.
+  // Kosongkan "teks" dan "asli" jika tidak ingin menampilkannya.
+  kutipan: {
+    asli: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",                                               // opsional: teks bahasa aslinya (misalnya Arab)
+    teks: "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.",
+    sumber: "QS. Ar-Rum: 21"
+  },
 
   mempelai: [
     { nama: "Mon", lengkap: "Mooooooonnnnnnnn", keterangan: "Putri kedua dari", ortu: "Bapak Mon dan Ibu Mon", instagram: "monicaayudj", foto: "foto1.jpeg" },
@@ -416,6 +584,8 @@ const CONFIG = {
     svg.setAttribute("class", "ranting " + kelas);
     svg.setAttribute("aria-hidden", "true");
     svg.setAttribute("focusable", "false");
+    svg.style.setProperty("--ayun", (-Math.random() * 8).toFixed(1) + "s");
+    svg.style.setProperty("--dur-ayun", (7 + Math.random() * 4).toFixed(1) + "s");
     const batang = document.createElementNS(NS, "path");
     batang.setAttribute("d", "M40 238 C36 180 46 110 40 14");
     batang.setAttribute("pathLength", "1");
@@ -434,6 +604,107 @@ const CONFIG = {
   }
   ["r-bkiri", "r-bkanan", "r-akiri", "r-akanan"].forEach(k => { $("#hiasCover").append(ranting(k)); $("#hiasHero").append(ranting(k)); });
   ["r-bkiri", "r-bkanan"].forEach(k => $("#hiasFooter").append(ranting(k)));
+
+  /* ----- Gerak tambahan: ranting tepi bagian, kerlip, kelopak jatuh ----- */
+  const kurangiGerak = !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const rand = (a, b) => a + Math.random() * (b - a);
+
+  function bunga(jenis, ukuran, posisi, desk) {
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 60 60");
+    svg.setAttribute("class", "bunga" + (jenis === 3 ? " mawar" : "") + (desk ? " desk" : ""));
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    const jumlah = jenis === 2 ? 10 : 6;
+    const bentuk = jenis === 2 ? "M30 30 C28 20 28 10 30 3 C32 10 32 20 30 30Z" : "M30 30 C22 21 22 9 30 2 C38 9 38 21 30 30Z";
+    for (let i = 0; i < jumlah; i++) {
+      const p = document.createElementNS(NS, "path");
+      p.setAttribute("d", bentuk);
+      p.setAttribute("class", "p");
+      p.setAttribute("transform", `rotate(${(i * 360 / jumlah).toFixed(1)} 30 30)`);
+      svg.append(p);
+    }
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", "30"); c.setAttribute("cy", "30");
+    c.setAttribute("r", jenis === 2 ? "2.6" : "3.4");
+    c.setAttribute("class", "pusat");
+    svg.append(c);
+    const arah = Math.random() < 0.5 ? "normal" : "reverse";
+    svg.style.cssText = `--b:${ukuran}px;--tm:${rand(0.2, 1.6).toFixed(1)}s;--dp:${rand(40, 70).toFixed(0)}s;animation-direction:normal,${arah};${posisi}`;
+    return svg;
+  }
+  function taruhBunga(wadah, daftar, desk) {
+    daftar.forEach(([jenis, ukuran, posisi]) => wadah.append(bunga(jenis, ukuran, posisi, desk)));
+  }
+  function hiasBagian(id, daftar, daftarBunga) {
+    const sec = $(id);
+    if (!sec) return;
+    const h = el("div", { class: "hias", "aria-hidden": "true" });
+    daftar.forEach(([kelas, atas]) => { const r = ranting(kelas); r.style.top = atas; h.append(r); });
+    taruhBunga(h, daftarBunga || [], true);
+    if (!kurangiGerak) kerlip(h, 7);
+    sec.prepend(h);
+  }
+  function tanamanMerambat() {
+    ["kiri", "kanan"].forEach((sisi, si) => {
+      const w = el("div", { class: "merambat " + sisi, "aria-hidden": "true" }, el("div", { class: "batang-m" }));
+      for (let i = 0; i < 15; i++) {
+        const d = el("span", { class: "daun-m" });
+        d.style.cssText = `--at:${(0.04 + i * 0.065 + (si ? 0.03 : 0)).toFixed(3)};--r:${(i % 2 ? 62 : 32) * (si ? -1 : 1)}deg`;
+        w.append(d);
+      }
+      document.body.append(w);
+    });
+    let menunggu = false;
+    const ukur = () => {
+      menunggu = false;
+      const maks = document.documentElement.scrollHeight - window.innerHeight;
+      const p = maks > 0 ? Math.min(1, Math.max(0, window.scrollY / maks)) : 0;
+      document.querySelectorAll(".merambat").forEach(n => n.style.setProperty("--p", p.toFixed(3)));
+    };
+    window.addEventListener("scroll", () => { if (!menunggu) { menunggu = true; requestAnimationFrame(ukur); } }, { passive: true });
+    window.addEventListener("resize", ukur);
+    ukur();
+  }
+  function kerlip(wadah, jumlah) {
+    for (let i = 0; i < jumlah; i++) {
+      const k = el("span", { class: "kerlip" });
+      k.style.cssText = `left:${rand(0, 96).toFixed(1)}%;top:${rand(0, 96).toFixed(1)}%;--k:${rand(6, 14).toFixed(0)}px;--dk:${rand(3, 6).toFixed(1)}s;--tk:${(-rand(0, 6)).toFixed(1)}s`;
+      wadah.append(k);
+    }
+  }
+  $("#hiasCover").parentNode.prepend(el("span", { class: "cincin" }), el("span", { class: "cincin b" }));
+  $("#hiasHero").parentNode.prepend(el("span", { class: "cincin" }), el("span", { class: "cincin b" }));
+  taruhBunga($("#hiasCover"), [
+    [1, 58, "left:2%;top:10%"], [2, 44, "right:4%;top:16%"], [2, 50, "left:6%;bottom:24%"],
+    [1, 46, "right:3%;bottom:30%"], [3, 34, "left:24%;top:4%"], [3, 30, "right:24%;bottom:8%"]
+  ]);
+  taruhBunga($("#hiasHero"), [
+    [1, 60, "left:3%;top:14%"], [2, 46, "right:5%;top:22%"], [3, 34, "left:10%;top:48%"], [1, 52, "right:2%;top:58%"]
+  ]);
+  taruhBunga($("#hiasFooter"), [[2, 46, "left:4%;top:16%"], [1, 54, "right:5%;top:22%"], [3, 32, "left:20%;top:60%"]]);
+
+  if (!kurangiGerak) {
+    kerlip($("#hiasCover"), 10);
+    kerlip($("#hiasHero"), 10);
+    kerlip($("#hiasFooter"), 8);
+    const wadahKelopak = el("div", { class: "kelopak-wadah", "aria-hidden": "true" });
+    const jumlahKelopak = (window.matchMedia && matchMedia("(max-width:600px)").matches) ? 12 : 24;
+    for (let i = 0; i < jumlahKelopak; i++) {
+      const k = el("span", { class: "kelopak" + (i % 4 === 3 ? " pasir" : (i % 5 === 4 ? " mawar" : "")) });
+      k.style.cssText = `--x:${rand(2, 96).toFixed(1)}%;--s:${rand(10, 20).toFixed(0)}px;--d:${rand(16, 30).toFixed(1)}s;--t:${(-rand(0, 30)).toFixed(1)}s;--g:${rand(20, 60).toFixed(0)}px`;
+      wadahKelopak.append(k);
+    }
+    const jumlahGelembung = jumlahKelopak > 12 ? 12 : 7;
+    const warnaGelembung = ["#8FA08A", "#C9B89B", "#D9BFB7"];
+    for (let i = 0; i < jumlahGelembung; i++) {
+      const g = el("span", { class: "gelembung" });
+      g.style.cssText = `--x:${rand(2, 98).toFixed(1)}%;--s:${rand(4, 11).toFixed(0)}px;--d:${rand(18, 34).toFixed(1)}s;--t:${(-rand(0, 34)).toFixed(1)}s;--g:${rand(15, 50).toFixed(0)}px;--wr:${warnaGelembung[i % 3]}`;
+      wadahKelopak.append(g);
+    }
+    document.body.append(wadahKelopak);
+    tanamanMerambat();
+  }
 
   const amanUrl = u => typeof u === "string" && u.trim() !== "" && !/^\s*(javascript|data|vbscript):/i.test(u);
 
@@ -492,12 +763,33 @@ const CONFIG = {
     }
     const v = [Math.floor(s / 86400), Math.floor((s % 86400) / 3600), Math.floor((s % 3600) / 60), s % 60];
     v.forEach((n, i) => { kotak[i].textContent = i === 0 ? String(n) : String(n).padStart(2, "0"); });
+    if (!kurangiGerak) { const b = kotak[3]; b.classList.remove("detak"); void b.offsetWidth; b.classList.add("detak"); }
   }
   tick();
   timer = setInterval(tick, 1000);
 
   /* ----- Salam dan mempelai ----- */
   $("#salamIsi").textContent = CONFIG.salam;
+
+  /* ----- Kutipan kitab suci ----- */
+  const KUT = Object.assign({ asli: "", teks: "", sumber: "" }, CONFIG.kutipan || {});
+  if (KUT.teks || KUT.asli) {
+    if (KUT.asli) { const a = $("#kAsli"); a.textContent = KUT.asli; a.hidden = false; }
+    $("#kTeks").textContent = KUT.teks;
+    $("#kTeks").hidden = !KUT.teks;
+    $("#kSumber").textContent = KUT.sumber;
+    $("#kSumber").hidden = !KUT.sumber;
+  } else {
+    $("#kutipan").remove();
+  }
+
+  /* ranting dan bunga di tepi tiap bagian */
+  hiasBagian("#kutipan",  [["r-skiri", "8%"], ["r-skanan", "45%"], ["r-skiri", "62%"]],  [[2, 40, "right:4%;top:6%"], [1, 36, "left:5%;top:70%"]]);
+  hiasBagian("#mempelai", [["r-skiri", "6%"], ["r-skanan", "52%"], ["r-skiri", "70%"]],  [[1, 46, "right:4%;top:8%"], [3, 34, "left:6%;top:42%"]]);
+  hiasBagian("#acara",    [["r-skanan", "6%"], ["r-skiri", "55%"], ["r-skanan", "78%"]], [[2, 44, "left:4%;top:10%"], [1, 40, "right:5%;top:44%"]]);
+  hiasBagian("#galeri",   [["r-skiri", "10%"], ["r-skanan", "60%"]],                      [[1, 40, "right:4%;top:12%"]]);
+  hiasBagian("#ucapan",   [["r-skiri", "4%"], ["r-skanan", "40%"], ["r-skiri", "74%"]],  [[2, 42, "right:4%;top:8%"], [3, 34, "left:5%;top:52%"]]);
+  hiasBagian("#hadiah",   [["r-skanan", "14%"], ["r-skiri", "46%"]],                      [[1, 44, "left:4%;top:10%"], [2, 38, "right:5%;top:62%"]]);
 
   const pasangan = $("#pasangan");
   CONFIG.mempelai.forEach(m => {
@@ -629,6 +921,20 @@ const CONFIG = {
     isi.focus({ preventScroll: true });
     if (audio) audio.play().then(() => setMusik(true)).catch(() => setMusik(false));
   });
+
+  /* ----- Muncul bertahap saat digulir ----- */
+  if (!kurangiGerak && "IntersectionObserver" in window) {
+    const pilihan = ".section h2:not(.sr-only), .section .pengantar, .salam-isi, .kutipan blockquote, .orang, .acara, .galeri-grid, .form, .rekening li, #alamatKado";
+    const io = new IntersectionObserver(entri => {
+      entri.forEach(e => { if (e.isIntersecting) { e.target.classList.add("tampak"); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    document.querySelectorAll(pilihan).forEach(n => {
+      const urut = Array.prototype.indexOf.call(n.parentNode.children, n);
+      n.style.transitionDelay = Math.min(urut, 4) * 0.12 + "s";
+      n.classList.add("ungkap");
+      io.observe(n);
+    });
+  }
 
   /* =====================================================================
      RSVP dan ucapan
