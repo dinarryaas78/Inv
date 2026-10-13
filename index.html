@@ -62,7 +62,7 @@
   .section{position:relative;padding:88px 24px;text-align:center}
   .section+.section{border-top:1px solid var(--line)}
   /* ornamen daun di tengah garis pemisah antarbagian */
-  .section+.section::before{content:"";position:absolute;left:50%;top:0;width:180px;height:24px;transform:translate(-50%,-50%);background:var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 24' fill='none' stroke='%238FA08A' stroke-width='1' stroke-linejoin='round'%3E%3Cpath d='M110 5 L117 12 L110 19 L103 12Z'/%3E%3Cpath d='M99 12 C92 5 82 5 74 12 C82 19 92 19 99 12Z M99 12 L77 12' fill='%238FA08A' fill-opacity='.14'/%3E%3Cpath d='M121 12 C128 5 138 5 146 12 C138 19 128 19 121 12Z M121 12 L143 12' fill='%238FA08A' fill-opacity='.14'/%3E%3Ccircle cx='62' cy='12' r='1.6' fill='%23C9B89B' stroke='none'/%3E%3Ccircle cx='158' cy='12' r='1.6' fill='%23C9B89B' stroke='none'/%3E%3C/svg%3E") center/contain no-repeat}
+  .section+.section::before{content:"";position:absolute;left:50%;top:0;width:180px;height:24px;transform:translate(-50%,-50%);background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 24' fill='none' stroke='%238FA08A' stroke-width='1' stroke-linejoin='round'%3E%3Cpath d='M110 5 L117 12 L110 19 L103 12Z'/%3E%3Cpath d='M99 12 C92 5 82 5 74 12 C82 19 92 19 99 12Z M99 12 L77 12' fill='%238FA08A' fill-opacity='.14'/%3E%3Cpath d='M121 12 C128 5 138 5 146 12 C138 19 128 19 121 12Z M121 12 L143 12' fill='%238FA08A' fill-opacity='.14'/%3E%3Ccircle cx='62' cy='12' r='1.6' fill='%23C9B89B' stroke='none'/%3E%3Ccircle cx='158' cy='12' r='1.6' fill='%23C9B89B' stroke='none'/%3E%3C/svg%3E") center/contain no-repeat}
   .wrap{max-width:720px;margin:0 auto}
   .section h2{font-size:clamp(2rem,6vw,2.6rem);line-height:1.1;margin-bottom:12px}
   .pengantar{max-width:48ch;margin:0 auto;color:var(--ink-soft)}
@@ -345,6 +345,49 @@
     .arch::before,.arch::after{animation:none!important;opacity:0}
     body.terbuka .hero .bunga{animation:none!important}
   }
+
+  /* ---------- Tema latar: warna dan pola bergantian ---------- */
+  :root{
+    --pola-a:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%238FA08A' stroke-width='1' stroke-linecap='round' stroke-linejoin='round' opacity='.38'%3E%3Cpath d='M30 70 C34 52 44 40 58 32'/%3E%3Cpath d='M38 58 C30 50 28 42 30 34 C38 38 42 48 38 58Z'/%3E%3Cpath d='M46 46 C54 44 62 46 68 52 C60 56 52 54 46 46Z'/%3E%3Cpath d='M52 38 C50 30 54 24 60 22 C62 28 60 34 52 38Z'/%3E%3Cpath d='M150 160 C146 178 136 190 122 198'/%3E%3Cpath d='M142 172 C150 180 152 188 150 196 C142 192 138 182 142 172Z'/%3E%3Cpath d='M134 184 C126 186 118 184 112 178 C120 174 128 176 134 184Z'/%3E%3C/g%3E%3Cg fill='%23C9B89B' opacity='.7'%3E%3Ccircle cx='120' cy='40' r='1.8'/%3E%3Ccircle cx='190' cy='90' r='1.4'/%3E%3Ccircle cx='70' cy='150' r='1.6'/%3E%3Ccircle cx='20' cy='190' r='1.2'/%3E%3Ccircle cx='185' cy='200' r='1.6'/%3E%3C/g%3E%3C/svg%3E");        /* pola daun tersebar (untuk latar putih kehijauan) */
+    --pola-b:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='64' viewBox='0 0 56 64'%3E%3Cg fill='none' stroke='%238FA08A' stroke-width='1' opacity='.30'%3E%3Cpath d='M6 64 V30 A22 22 0 0 1 50 30 V64'/%3E%3Cpath d='M14 64 V32 A14 14 0 0 1 42 32 V64'/%3E%3C/g%3E%3Ccircle cx='28' cy='40' r='1.6' fill='%23C9B89B' opacity='.7'/%3E%3C/svg%3E");        /* pola lengkungan (untuk latar hijau kabut) */
+    --ranting-latar:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 240' fill='%238FA08A' fill-opacity='.12' stroke='%238FA08A' stroke-opacity='.45' stroke-width='.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M40 238 C36 180 46 110 40 14' fill='none'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(39 205) rotate(-40) scale(1.1)'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(39 180) rotate(-140) scale(1.05)'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(42 150) rotate(-42) scale(1)'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(44 125) rotate(-138) scale(0.95)'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(44 95) rotate(-45) scale(0.9)'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(43 72) rotate(-135) scale(0.8)'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(41 48) rotate(-48) scale(0.7)'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(40 30) rotate(-132) scale(0.6)'/%3E%3Cpath d='M0 0 C7 -9 20 -9 30 0 C20 9 7 9 0 0Z M2 0 L27 0' transform='translate(40 14) rotate(-90) scale(0.6)'/%3E%3C/svg%3E");
+  }
+  body{overflow-x:hidden}
+  .section,footer{overflow-x:clip}
+  footer{overflow:visible;overflow-x:clip}
+  .section+.section{border-top:0}
+
+  [data-tema="a"]{--bg:var(--paper);background:var(--paper) var(--pola-a);background-size:220px 220px}
+  [data-tema="b"]{--bg:var(--mist);background:var(--mist) var(--pola-b);background-size:56px 64px}
+  .hero{background:var(--mist) var(--pola-a);background-size:220px 220px}
+  .cover{background:var(--mist) var(--pola-b);background-size:56px 64px}
+
+  /* bingkai tipis di sampul */
+  .cover::before{content:"";position:absolute;inset:14px;border:1px solid rgba(201,184,155,.85);
+    outline:1px solid rgba(143,160,138,.3);outline-offset:5px;pointer-events:none}
+
+  /* tepi bergelombang di antara hero dan bagian berikutnya, dan di atas penutup */
+  .hero+.section::before,footer::before{content:"";position:absolute;left:0;right:0;top:-11px;height:12px;background:var(--bg);pointer-events:none;
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M0 12 A20 12 0 0 1 40 12Z'/%3E%3C/svg%3E") repeat-x bottom center/40px 12px;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12'%3E%3Cpath d='M0 12 A20 12 0 0 1 40 12Z'/%3E%3C/svg%3E") repeat-x bottom center/40px 12px}
+
+  /* ranting besar samar sebagai hiasan latar di sudut tiap bagian */
+  [data-tema]::after{content:"";position:absolute;bottom:-50px;width:clamp(110px,22vw,190px);aspect-ratio:1/3;
+    background:var(--ranting-latar) center/contain no-repeat;pointer-events:none;z-index:0;transform-origin:50% 100%}
+  [data-tema="a"]::after{right:-24px;transform:rotate(-14deg)}
+  [data-tema="b"]::after{left:-24px;transform:scaleX(-1) rotate(-14deg)}
+
+  /* hiasan kecil di bawah judul bagian */
+  .section h2:not(.sr-only)::after{content:"";display:block;width:96px;height:14px;margin:14px auto 0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 14' fill='none'%3E%3Cpath d='M0 7 H36 M60 7 H96' stroke='%23C9B89B' stroke-width='1'/%3E%3Cpath d='M48 1 L55 7 L48 13 L41 7Z' stroke='%238FA08A' stroke-width='1' fill='%238FA08A' fill-opacity='.15'/%3E%3C/svg%3E") center/contain no-repeat}
+
+  /* panel lembut agar isi lebih menonjol dari latar bermotif */
+  .form{padding:28px;background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:18px}
+  .daftar{background:rgba(255,255,255,.45);border:1px solid var(--line);border-radius:18px;padding:0 20px}
+  .rekening{background:rgba(255,255,255,.45);border:1px solid var(--line);border-radius:18px;padding:0 20px}
+  .rekening li:first-child{border-top:0}
+  .rekening li:last-child{border-bottom:0}
+  .kutipan blockquote{padding:48px 28px 40px;border:1px solid var(--sand);outline:1px solid rgba(143,160,138,.35);outline-offset:-8px;
+    background:rgba(255,255,255,.4);border-radius:4px}
 </style>
 </head>
 
@@ -921,6 +964,14 @@ const CONFIG = {
     isi.focus({ preventScroll: true });
     if (audio) audio.play().then(() => setMusik(true)).catch(() => setMusik(false));
   });
+
+  /* ----- Tema latar: warna dan pola bergantian ----- */
+  (function () {
+    const tampil = [...document.querySelectorAll("main > .section")].filter(n => !n.hidden);
+    tampil.forEach((n, i) => { n.dataset.tema = i % 2 ? "b" : "a"; });
+    const terakhir = tampil.length ? tampil[tampil.length - 1].dataset.tema : "b";
+    $("footer").dataset.tema = terakhir === "a" ? "b" : "a";
+  })();
 
   /* ----- Muncul bertahap saat digulir ----- */
   if (!kurangiGerak && "IntersectionObserver" in window) {
